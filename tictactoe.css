@@ -1,0 +1,88 @@
+* {
+    --background: lightgrey;
+    --body-background: rgb(255, 255, 255);
+    --active: rgb(251, 230, 186);
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--body-background);
+    margin: 0;
+    font-family: sans-serif;
+}
+
+.header {
+    border: 1px solid;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-size: x-small;
+    margin-bottom: 10px;
+}
+
+.board {
+    display: flex;
+    flex-direction: row;
+    width: 90vw;
+    height: 90vw;
+    background-color: var(--body-background);
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex-wrap: wrap;
+    background-color: var(--body-background);
+    margin: 2px;
+}
+
+
+.box {
+    border-radius: 2px;
+    border: 1px solid lightgrey;
+    display: flex;
+    background-color: var(--body-background);
+    width: 100%;
+    margin: 5px;
+    justify-content: center;
+    align-items: center;
+    transition: 1s;
+    line-height: 0;
+    font-size: x-large;
+
+}
+
+.box:hover {
+transition: 1s;
+background-color: var(--background);
+}
+
+.box:active {
+transition: -1s;
+background-color: var(--active);
+}
+
+.activePlayer {
+    display: flex;
+    gap: 5px;
+    font-size: x-small;
+    padding: 5px;
+    margin: 5px;
+}
+
+button{
+    background-color: transparent;
+    border: 1px solid;
+    font-size: small;
+    border-radius: 3px;
+    transition: 1s;
+}
+
+button:hover{
+    background-color: var(--background);
+    transition: 1s;
+}
