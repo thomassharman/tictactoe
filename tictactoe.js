@@ -33,7 +33,7 @@ boxes.forEach((box) => {box.addEventListener('click',  function() {
         Gameboard.winner(currentPlayer)
         // checkWins(currentPlayer)
         currentPlayer = 'O'; //switch current player BEFORE auto-switching
-        Gameboard.player()
+        Gameboard.player(currentPlayer)
         }
         
 
@@ -43,7 +43,7 @@ boxes.forEach((box) => {box.addEventListener('click',  function() {
         Gameboard.winner(currentPlayer)
         // checkWins(currentPlayer)
         currentPlayer = 'X';
-        Gameboard.player()
+        Gameboard.player(currentPlayer)
         }
 
         }
