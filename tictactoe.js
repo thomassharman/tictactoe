@@ -17,7 +17,7 @@ playerX.addEventListener ('click', () => {currentPlayer = 'X'
 
 boxes.forEach((box) => {box.addEventListener('click',  function() {
     console.log(this.classList) //check it has successfully selected the box
-    
+
     if (this.textContent === '' && currentPlayer != 'none') {
         const boxIndex = parseInt(this.classList[1]) //get the second class set of the box and use it as the index
         console.log('BI:', boxIndex)
@@ -50,25 +50,6 @@ boxes.forEach((box) => {box.addEventListener('click',  function() {
       
     }
 })})
-
-//Show Player Function
-// function showCurrentPlayer() {
-// if(currentPlayer === 'X') {
-//     playerO.style.color = 'black'
-//     playerO.style.backgroundColor = 'rgba(255, 255, 255, 0)'
-//     playerX.style.color = 'white'
-//     playerX.style.backgroundColor = 'rgb(163, 64, 64)'
-//     console.log(Gameboard)
-// }
-// else if(currentPlayer === 'O') {
-//     playerX.style.color = 'black'
-//     playerX.style.backgroundColor = 'rgba(255, 255, 255, 0)'
-//     playerO.style.color = 'white'
-//     playerO.style.backgroundColor = 'rgb(53, 116, 66)'
-//     console.log(Gameboard)
-
-// }
-// }
 
 //gameboard array inside gameboard object
 
