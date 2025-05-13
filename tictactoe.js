@@ -1,5 +1,4 @@
 let currentPlayer = 'none'
-
 //DOM Elements
 const playerO = document.querySelector('#playerO')
 const playerX = document.querySelector('#playerX')
@@ -8,12 +7,12 @@ const boxes = document.querySelectorAll('.box')
 //Event Listeners
 playerO.addEventListener ('click', () => {currentPlayer = 'O'
     console.log('current player:', currentPlayer)
-    showCurrentPlayer()
+    Gameboard.player()
 })
 
 playerX.addEventListener ('click', () => {currentPlayer = 'X'
     console.log('current player:', currentPlayer)
-    showCurrentPlayer ()
+    Gameboard.player()
 })
 
 boxes.forEach((box) => {box.addEventListener('click',  function() {
@@ -34,7 +33,7 @@ boxes.forEach((box) => {box.addEventListener('click',  function() {
         Gameboard.winner(currentPlayer)
         // checkWins(currentPlayer)
         currentPlayer = 'O'; //switch current player BEFORE auto-switching
-        showCurrentPlayer()
+        Gameboard.player()
         }
         
 
@@ -44,7 +43,7 @@ boxes.forEach((box) => {box.addEventListener('click',  function() {
         Gameboard.winner(currentPlayer)
         // checkWins(currentPlayer)
         currentPlayer = 'X';
-        showCurrentPlayer()
+        Gameboard.player()
         }
 
         }
@@ -53,23 +52,23 @@ boxes.forEach((box) => {box.addEventListener('click',  function() {
 })})
 
 //Show Player Function
-function showCurrentPlayer() {
-if(currentPlayer === 'X') {
-    playerO.style.color = 'black'
-    playerO.style.backgroundColor = 'rgba(255, 255, 255, 0)'
-    playerX.style.color = 'white'
-    playerX.style.backgroundColor = 'rgb(163, 64, 64)'
-    console.log(Gameboard)
-}
-else if(currentPlayer === 'O') {
-    playerX.style.color = 'black'
-    playerX.style.backgroundColor = 'rgba(255, 255, 255, 0)'
-    playerO.style.color = 'white'
-    playerO.style.backgroundColor = 'rgb(53, 116, 66)'
-    console.log(Gameboard)
+// function showCurrentPlayer() {
+// if(currentPlayer === 'X') {
+//     playerO.style.color = 'black'
+//     playerO.style.backgroundColor = 'rgba(255, 255, 255, 0)'
+//     playerX.style.color = 'white'
+//     playerX.style.backgroundColor = 'rgb(163, 64, 64)'
+//     console.log(Gameboard)
+// }
+// else if(currentPlayer === 'O') {
+//     playerX.style.color = 'black'
+//     playerX.style.backgroundColor = 'rgba(255, 255, 255, 0)'
+//     playerO.style.color = 'white'
+//     playerO.style.backgroundColor = 'rgb(53, 116, 66)'
+//     console.log(Gameboard)
 
-}
-}
+// }
+// }
 
 //gameboard array inside gameboard object
 
@@ -107,4 +106,21 @@ const Gameboard = {
     }
 
 
-}}}
+}},
+    player: function(player){
+        if(currentPlayer === 'X') {
+    playerO.style.color = 'black'
+    playerO.style.backgroundColor = 'rgba(255, 255, 255, 0)'
+    playerX.style.color = 'white'
+    playerX.style.backgroundColor = 'rgb(163, 64, 64)'
+    console.log(Gameboard)
+}
+else if(currentPlayer === 'O') {
+    playerX.style.color = 'black'
+    playerX.style.backgroundColor = 'rgba(255, 255, 255, 0)'
+    playerO.style.color = 'white'
+    playerO.style.backgroundColor = 'rgb(53, 116, 66)'
+    console.log(Gameboard)
+
+}
+    }}
