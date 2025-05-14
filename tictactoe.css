@@ -99,3 +99,8 @@ padding: 10vw;
 box-shadow: 1px 5px 10px rgb(55, 55, 55);
 }
 
+.playerSelector {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 10px;
+}
