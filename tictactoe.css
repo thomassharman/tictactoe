@@ -87,3 +87,15 @@ button:hover{
     transition: 1s;
 }
 
+.winAnnouncement {
+font-size: xx-large;
+font-weight: 700;
+display: flex;
+position: fixed;
+background-color: lightgrey;
+border: 0;
+border-radius: 5px;
+padding: 10vw;
+box-shadow: 1px 5px 10px rgb(55, 55, 55);
+}
+

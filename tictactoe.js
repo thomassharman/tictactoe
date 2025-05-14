@@ -7,12 +7,12 @@ const boxes = document.querySelectorAll('.box')
 //Event Listeners
 playerO.addEventListener ('click', () => {currentPlayer = 'O'
     console.log('current player:', currentPlayer)
-    Gameboard.player()
+    Gameboard.player(currentPlayer)
 })
 
 playerX.addEventListener ('click', () => {currentPlayer = 'X'
     console.log('current player:', currentPlayer)
-    Gameboard.player()
+    Gameboard.player(currentPlayer)
 })
 
 boxes.forEach((box) => {box.addEventListener('click',  function() {
@@ -33,7 +33,7 @@ boxes.forEach((box) => {box.addEventListener('click',  function() {
         Gameboard.winner(currentPlayer)
         // checkWins(currentPlayer)
         currentPlayer = 'O'; //switch current player BEFORE auto-switching
-        Gameboard.player()
+        Gameboard.player(currentPlayer)
         }
         
 
@@ -43,7 +43,7 @@ boxes.forEach((box) => {box.addEventListener('click',  function() {
         Gameboard.winner(currentPlayer)
         // checkWins(currentPlayer)
         currentPlayer = 'X';
-        Gameboard.player()
+        Gameboard.player(currentPlayer)
         }
 
         }
@@ -74,7 +74,7 @@ const Gameboard = {
                 [0,3,6], [1,4,7], [2,5,8], //rows
                 [0,4,8], [6,4,2]//diagonals
             ]
-
+        
         for (i = 0; i < wins.length; i++) {
     const check = wins[i]
     const a = this.board[check[0]]
@@ -83,12 +83,27 @@ const Gameboard = {
        
     if (a === player && b === player && c === player) {
         console.log('winner:', player)
+        const winnerText = document.createElement('div')
+        winnerText.classList = 'winAnnouncement'
+        winnerText.textContent = `Player '${player}' Wins!`
+        
+        if (player === 'X') {
+            winnerText.style.color = 'rgb(163, 64, 64)'
+        }
+        else {
+            winnerText.style.color = 'rgb(53, 116, 66)'
+        }
+        document.body.appendChild(winnerText)
+        Gameboard.board = ['','','','','','','','','']
+        console.log('reset board:', Gameboard.board)
+        setTimeout(() => Gameboard.reset(Gameboard.board, winnerText), 2000) //this will be immediately invoked without the function reference () => essentially saying i want a function to be performed 
         return true
+        //create append to DOM function
     }
 
 
 }},
-    player: function(player){
+    player: function(currentPlayer){
         if(currentPlayer === 'X') {
     playerO.style.color = 'black'
     playerO.style.backgroundColor = 'rgba(255, 255, 255, 0)'
@@ -104,4 +119,16 @@ else if(currentPlayer === 'O') {
     console.log(Gameboard)
 
 }
-    }}
+    },
+    reset: function(board, winnerTextDiv) {
+      this.board = ['','','','','','','','',''],
+      console.log('game reset:', board)
+      boxes.forEach((box) => {
+        box.textContent = ''
+        box.style.backgroundColor = ''
+        box.style.color = ''
+      })
+      currentPlayer = 'none'
+      setTimeout(() => {document.body.removeChild(winnerTextDiv)}, 1000) 
+    },
+}
