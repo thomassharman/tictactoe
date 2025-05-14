@@ -84,7 +84,15 @@ const Gameboard = {
     if (a === player && b === player && c === player) {
         console.log('winner:', player)
         const winnerText = document.createElement('div')
-        winnerText.textContent = `${player} Wins!`
+        winnerText.classList = 'winAnnouncement'
+        winnerText.textContent = `Player '${player}' Wins!`
+        
+        if (player === 'X') {
+            winnerText.style.color = 'rgb(163, 64, 64)'
+        }
+        else {
+            winnerText.style.color = 'rgb(53, 116, 66)'
+        }
         document.body.appendChild(winnerText)
         Gameboard.board = ['','','','','','','','','']
         console.log('reset board:', Gameboard.board)
@@ -121,6 +129,6 @@ else if(currentPlayer === 'O') {
         box.style.color = ''
       })
       currentPlayer = 'none'
-      setTimeout(() => {document.body.removeChild(winnerTextDiv)}, 2000) 
+      setTimeout(() => {document.body.removeChild(winnerTextDiv)}, 1000) 
     },
 }
