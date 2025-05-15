@@ -1,23 +1,17 @@
-//the Gameboard inside of a Module pattern using encapsulation
-const Gameboard = function() {
-    let board = ['','','','','','','','','']
-    let currentPlayer = 'none'
-    let playerO
-    let playerX
-    let boxes
+let currentPlayer = 'none'
+//DOM Elements
+const playerO = document.querySelector('#playerO')
+const playerX = document.querySelector('#playerX')
+const boxes = document.querySelectorAll('.box')
 
-function DomElements() {
-    playerO = document.querySelector('#playerO')
-    playerX = document.querySelector('#playerX')
-    boxes = document.querySelectorAll('.box')
-    playerO.addEventListener ('click', () => {currentPlayer = 'O'
+playerO.addEventListener ('click', () => {currentPlayer = 'O'
     console.log('current player:', currentPlayer)
-    playerDisplay(currentPlayer)
+    Gameboard.player(currentPlayer)
 })
 
 playerX.addEventListener ('click', () => {currentPlayer = 'X'
     console.log('current player:', currentPlayer)
-    playerDisplay(currentPlayer)
+    Gameboard.player(currentPlayer)
 })
 
 boxes.forEach((box) => {box.addEventListener('click',  function() {
@@ -26,50 +20,52 @@ boxes.forEach((box) => {box.addEventListener('click',  function() {
     if (this.textContent === '' && currentPlayer != 'none') {
         const boxIndex = parseInt(this.classList[1]) //get the second class set of the box and use it as the index
         console.log('BI:', boxIndex)
-        const playerMove = cells(boxIndex, currentPlayer) //pass the second class of the object clicked as the index of the item in the gameboard array and set the value to the current player X or O
-        console.log('Gameboard:', board)
+        const playerMove = Gameboard.cells(boxIndex, currentPlayer) //pass the second class of the object clicked as the index of the item in the gameboard array and set the value to the current player X or O
+        console.log('Gameboard:', Gameboard.board)
 
         if (playerMove) {
-    this.textContent = currentPlayer
+  this.textContent = currentPlayer
 
       if (currentPlayer === 'X') {
         this.style.color = 'white';
         this.style.backgroundColor = 'rgb(163, 64, 64)'
-        winner(currentPlayer)
+        Gameboard.winner(currentPlayer)
         // checkWins(currentPlayer)
         currentPlayer = 'O'; //switch current player BEFORE auto-switching
-        playerDisplay(currentPlayer)
+        Gameboard.player(currentPlayer)
         }
         
 
         else if (currentPlayer === 'O') {
         this.style.color = 'white';
         this.style.backgroundColor = 'rgb(53, 116, 66'
-        winner(currentPlayer)
+        Gameboard.winner(currentPlayer)
         // checkWins(currentPlayer)
         currentPlayer = 'X';
-        playerDisplay(currentPlayer)
+        Gameboard.player(currentPlayer)
         }
 
         }
       
     }
-playerDisplay(currentPlayer)}
-)})
-}
- 
-    const getBoard = function () {
-        return board
-    }
-    const cells = function(index, player) {
-        if (board[index] === '') {
-            board[index] = player
+})})
+
+const Gameboard = {
+    board: ['','','','','','','','',''],
+    
+    getBoard: function() {
+        return this.board
+    },
+
+    cells: function(index, player) {
+        if (this.board[index] === '') {
+            this.board[index] = player
             return true
 }
             return false
-    }
+    },
+    winner: function(player) {
 
-    const winner = function(player) {
         const wins = [
                 [0,1,2], [3,4,5], [6,7,8],//columns
                 [0,3,6], [1,4,7], [2,5,8], //rows
@@ -78,9 +74,9 @@ playerDisplay(currentPlayer)}
         
         for (i = 0; i < wins.length; i++) {
     const check = wins[i]
-    const a = board[check[0]]
-    const b = board[check[1]]
-    const c = board[check[2]]
+    const a = this.board[check[0]]
+    const b = this.board[check[1]]
+    const c = this.board[check[2]]
        
     if (a === player && b === player && c === player) {
         console.log('winner:', player)
@@ -95,48 +91,41 @@ playerDisplay(currentPlayer)}
             winnerText.style.color = 'rgb(53, 116, 66)'
         }
         document.body.appendChild(winnerText)
-        board = ['','','','','','','','','']
-        console.log('reset board:', board)
-        setTimeout(() => reset(winnerText), 2000)
+        Gameboard.board = ['','','','','','','','','']
+        console.log('reset board:', Gameboard.board)
+        setTimeout(() => Gameboard.reset(Gameboard.board, winnerText), 2000) //this will be immediately invoked without the function reference () => essentially saying i want a function to be performed 
         return true
         //create append to DOM function
     }
-    }
-}
-const playerDisplay = function(currentPlayer){
+
+
+}},
+    player: function(currentPlayer){
         if(currentPlayer === 'X') {
     playerO.style.color = 'black'
     playerO.style.backgroundColor = 'rgba(255, 255, 255, 0)'
     playerX.style.color = 'white'
     playerX.style.backgroundColor = 'rgb(163, 64, 64)'
+    console.log(Gameboard)
 }
 else if(currentPlayer === 'O') {
     playerX.style.color = 'black'
     playerX.style.backgroundColor = 'rgba(255, 255, 255, 0)'
     playerO.style.color = 'white'
     playerO.style.backgroundColor = 'rgb(53, 116, 66)'
-}}
-const reset = function(winnerTextDiv){
- board = ['','','','','','','','',''],
-      
- console.log('game reset:', board)
+    console.log(Gameboard)
+
+}
+    },
+    reset: function(board, winnerTextDiv) {
+      this.board = ['','','','','','','','',''],
+      console.log('game reset:', board)
       boxes.forEach((box) => {
         box.textContent = ''
         box.style.backgroundColor = ''
         box.style.color = ''
       })
       currentPlayer = 'none'
-      setTimeout(() => {document.body.removeChild(winnerTextDiv)}, 1000)
-}
-return {
-        DomElements: DomElements,
-        getBoard: getBoard,
-        cells: cells,
-        winner: winner,
-        player: playerDisplay,
-        reset: reset
-}}
-
-window.onload = function() {
-    Gameboard().DomElements()
+      setTimeout(() => {document.body.removeChild(winnerTextDiv)}, 1000) 
+    },
 }
