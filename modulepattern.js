@@ -1,4 +1,5 @@
 //the Gameboard inside of a Module pattern using encapsulation
+
 const Gameboard = function() {
     let board = ['','','','','','','','','']
     let currentPlayer = 'none'
